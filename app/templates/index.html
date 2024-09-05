@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.content.label }} {{ form.content() }}
+        {{ form.submit() }}
+    </form>
+
+    <ul>
+        {% for todo in todos %}
+            <li>
+                {% if todo.done %}
+                    <strike>{{ todo.content }}</strike>
+                {% else %}
+                    {{ todo.content }}
+                {% endif %}
+                <a href="{{ url_for('main.toggle', id=todo.id) }}">Toggle</a>
+                <a href="{{ url_for('main.delete', id=todo.id) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
